@@ -1,10 +1,26 @@
 # Run the MDP value iteration algorithm
-function markovdecision(list::Vector{Int64}, circular::Bool)::Tuple{Vector{Int64}, Vector{Int64}}
-    println("Hello, world !")
-    return(([1],[2]))
-end
+function markovdecision(list::Vector{Int64}, circular::Bool)
+    # Get transition probability matrices
+    A = securitydice(list)
+    C = riskydice(list, circular)
+    # Initialize value vector
+    oldV = zeros(15)
+    newV = [float(i) for i = 14:-1:0] 
+    while sum(abs.(newV-oldV)) > 1e-9
+        oldV = copy(newV)
+        for i = 1:14
+            newV[i] = 1 + min(A[i,:]'*oldV, C[i,:]'*oldV)
+        end
+        newV[15] = min(A[15,:]'*oldV, C[15,:]'*oldV)
+        println(newV)
+    end
 
-(a,b) = markovdecision([1])
+    dice = zeros(15)
+    for i = 1:15
+        dice[i] = indmin([A[i,:]'*newV, C[i,:]'*newV])
+    end
+    return((newV,dice))
+end
 
 # Computes the transition probability matrix for the security dice
 function securitydice(list::Vector{Int64})::Array{Float64,2}
@@ -130,6 +146,8 @@ function riskydice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
     return proba
 end
 
-A = riskydice([0,0,1,0,2,2,1,0,2,1,0,0,1,2,0], true)
-println(A)
-println(sum(A,2))
+List = [0,0,0,2,2,1,0,0,1,1,0,2,1,0,0]
+circular = false
+(Expec, Dice) = markovdecision(List, circular)
+println(Expec)
+println(Dice)
