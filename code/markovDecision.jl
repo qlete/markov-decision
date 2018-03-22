@@ -1,11 +1,15 @@
+include("squaresub.jl")
+
 # Run the MDP value iteration algorithm
-function markovdecision(list::Vector{Int64}, circular::Bool)
+function markovdecision(list::Vector{Int64}, circular::Bool)::Tuple{Vector{Float64},Vector{Int64}}
     # Get transition probability matrices
     A = securitydice(list)
     C = riskydice(list, circular)
+    
     # Initialize value vector
     oldV = zeros(15)
     newV = [float(i) for i = 14:-1:0] 
+    # newV = []
     while sum(abs.(newV-oldV)) > 1e-9
         oldV = copy(newV)
         for i = 1:14
@@ -15,9 +19,9 @@ function markovdecision(list::Vector{Int64}, circular::Bool)
         println(newV)
     end
 
-    dice = zeros(15)
+    dice = zeros(Int64, 15)
     for i = 1:15
-        dice[i] = indmin([A[i,:]'*newV, C[i,:]'*newV])
+        dice[i] = indmin([A[i,:]'*newV, Inf, C[i,:]'*newV])-1
     end
     return((newV,dice))
 end
@@ -30,45 +34,14 @@ function securitydice(list::Vector{Int64})::Array{Float64,2}
         if i == 3
             proba[i,i+1] = 0.25
             proba[i,i+8] = 0.25
+        elseif i == 10
+            proba[i,i+5] = 0.5
         else
             proba[i,i+1] = 0.5
         end
     end
     proba[15,15] = 1
     return proba
-end
-
-# Implement the substitution of a square by 3 for our paticular board game
-# Examples for noncicular case: 
-#   subsquare(2,false) = 1; subsquare(12,false) = 2; subsquare(8,false) = 5
-# Example for circular case:
-#   subsquare(2,true) = 10 
-function squaresub(square::Int64, circular::Bool)
-    if square <= 3
-        if circular
-            if i == 1
-                return 9
-            elseif i == 2
-                return 10
-            elseif i == 3
-                return 15
-            end
-        else
-            return 1
-        end
-    else
-        if square == 11
-            return 2
-        elseif square == 12
-            return 3
-        elseif square == 13
-            return 4
-        elseif square == 15
-            return 8
-        else
-            return square-3
-        end
-    end
 end
 
 # Computes the transition probability matrix for the risky dice
@@ -135,8 +108,10 @@ function riskydice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
     for i = 1:15
         for j = 1:15
             if list[j] == 1 # Trap of type 1 : go back to square 1
-                proba[i,1] = proba[i,1] + proba[i,j]
-                proba[i,j] = 0
+                if j != 1 
+                    proba[i,1] = proba[i,1] + proba[i,j]
+                    proba[i,j] = 0
+                end
             elseif list[j] == 2 # Trap of type 2 : go back three squares
                 proba[i,squaresub(j,circular)] = proba[i,squaresub(j,circular)] + proba[i,j]
                 proba[i,j] = 0
@@ -145,9 +120,3 @@ function riskydice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
     end
     return proba
 end
-
-List = [0,0,0,2,2,1,0,0,1,1,0,2,1,0,0]
-circular = false
-(Expec, Dice) = markovdecision(List, circular)
-println(Expec)
-println(Dice)
