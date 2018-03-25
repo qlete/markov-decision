@@ -71,7 +71,7 @@ function oneturn(list::Vector{Int64}, start::Int64, dice::Int64, circular::Bool)
 			elseif list[nextbox] == 1
 				return 1
 			elseif list[nextbox] == 2
-				return squaresub(nextbox, circular)
+				return squaresub(nextbox, circular, 3)
 			end
 		else
 			return nextbox
@@ -82,7 +82,7 @@ function oneturn(list::Vector{Int64}, start::Int64, dice::Int64, circular::Bool)
 		elseif list[nextbox] == 1
 			return 1
 		elseif list[nextbox] == 2
-			return squaresub(nextbox, circular)
+			return squaresub(nextbox, circular, 3)
 		end
 	end
 end

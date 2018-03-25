@@ -113,7 +113,7 @@ function riskydice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
                     proba[i,j] = 0
                 end
             elseif list[j] == 2 # Trap of type 2 : go back three squares
-                proba[i,squaresub(j,circular)] = proba[i,squaresub(j,circular)] + proba[i,j]
+                proba[i,squaresub(j,circular, 3)] = proba[i,squaresub(j,circular, 3)] + proba[i,j]
                 proba[i,j] = 0
             end
         end
