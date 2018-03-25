@@ -61,4 +61,20 @@ function makeexperiments()
     (expec, dice) = markovdecision(list, true)
     println("cost ", expec)
     println("dice ", dice)
+    
+    list = ones(Int64, 15)
+    println("\n", list, "\n")
+    
+    println(" --- Noncircular --- ")
+    (expec, dice) = markovdecision(list, false)
+    println("cost ", expec)
+    println("dice ", dice)
+    
+    println(" --- Circular --- ")
+    (expec, dice) = markovdecision(list, true)
+    println("cost ", expec)
+    println("dice ", dice)
 end
+
+# makeexperiments()
+
