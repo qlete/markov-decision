@@ -27,11 +27,11 @@ function oneturn(list::Vector{Int64}, start::Int64, dice::Int64, circular::Bool)
 			start = 10
 		end
 	end
-	if dice == 0
+	if dice == 1
 		nextbox = start + rand(0:1)
-	elseif dice == 1
-		nextbox = start + rand(0:2)
 	elseif dice == 2
+		nextbox = start + rand(0:2)
+	elseif dice == 3
 		nextbox = start + rand(0:3)
 	end
 	if path == 1
@@ -62,9 +62,9 @@ function oneturn(list::Vector{Int64}, start::Int64, dice::Int64, circular::Bool)
 			nextbox = 3
 		end
 	end
-	if dice == 0
+	if dice == 1
 		return nextbox
-	elseif dice == 1
+	elseif dice == 2
 		if rand([false, true])
 			if list[nextbox] == 0
 				return nextbox
@@ -76,7 +76,7 @@ function oneturn(list::Vector{Int64}, start::Int64, dice::Int64, circular::Bool)
 		else
 			return nextbox
 		end
-	elseif dice == 2
+	elseif dice == 3
 		if list[nextbox] == 0
 			return nextbox
 		elseif list[nextbox] == 1
