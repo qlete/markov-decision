@@ -1,32 +1,55 @@
-# Implement the substitution of a square by 3 for our paticular board game
-# Examples for noncicular case: 
-#   subsquare(2,false) = 1; subsquare(12,false) = 2; subsquare(8,false) = 5
-# Example for circular case:
-#   subsquare(2,true) = 10 
-function squaresub(square::Int64, circular::Bool)
-    if square <= 3
+# Implement the substitution of a square by k
+
+using Base.Test
+
+function squaresub_k(square::Int64, circular::Bool, k::Int64)
+    if k == 0
+        return square
+    end
+    if square == 1
         if circular
-            if square == 1
-                return 9
-            elseif square == 2
-                return 10
-            elseif square == 3
+            if k == 1
                 return 15
+            else
+                return squaresub_k(10, circular, k-2)
             end
         else
             return 1
         end
-    else
-        if square == 11
-            return 2
-        elseif square == 12
-            return 3
-        elseif square == 13
-            return 4
-        elseif square == 15
-            return 8
-        else
-            return square-3
+    elseif square == 11
+        return squaresub_k(3, circular, k-1)
+    else            
+        return squaresub_k(square-1, circular, k-1)
+    end
+end
+
+function squaresubtests() 
+    @testset "Move k backward" begin
+        @testset "Non circular" begin
+            circular = false
+            k = 3
+            @test squaresub_k(1, circular, k) == 1
+            @test squaresub_k(2, circular, k) == 1
+            @test squaresub_k(3, circular, k) == 1
+            @test squaresub_k(4, circular, k) == 1
+                           
+            @test squaresub_k(11, circular, k) == 1
+            @test squaresub_k(12, circular, k) == 2
+            @test squaresub_k(13, circular, k) == 3
+        end
+        @testset "Circular" begin
+            circular = true
+            k = 3
+            @test squaresub_k(1, circular, k) == 9
+            @test squaresub_k(2, circular, k) == 10
+            @test squaresub_k(3, circular, k) == 15
+            @test squaresub_k(4, circular, k) == 1
+            
+            @test squaresub_k(11, circular, k) == 1
+            @test squaresub_k(12, circular, k) == 2
+            @test squaresub_k(13, circular, k) == 3
         end
     end
 end
+
+squaresubtests()
