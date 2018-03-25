@@ -1,0 +1,33 @@
+\documentclass[11pt,oneside,a4paper]{article}
+
+\usepackage{./custom}
+
+% \usepackage[backend=biber]{biblatex}
+% \addbibresource{./biblio.bib}
+
+\begin{document}
+% title (fold)
+
+\input{./titlepage}
+
+{\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\newpage
+
+\input{./src/intro}
+% \newpage
+\input{./src/model}
+% \newpage
+\input{./src/implementation}
+% \newpage
+\input{./src/results}
+
+% \addcontentsline{toc}{part}{References}
+% \nocite{*}
+% \hypersetup{urlcolor=black}
+% \printbibliography
+% \newpage
+
+\end{document}

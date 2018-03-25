@@ -28,3 +28,5 @@
 *.json
 *.zip
 *.pyc
+report/report.pdf
+report/auxFiles/report.pdf
