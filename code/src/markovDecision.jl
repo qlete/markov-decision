@@ -35,7 +35,7 @@ function printmarkovresults(list, expec, dice)
     dice_print = "Dice \t|"
     for i=1:15
         board_print = board_print * string(list[i]) * "\t|"
-        expec_print = expec_print * string(round(expec[i],2)) * "\t|"
+        expec_print = expec_print * string(round(expec[i],3)) * "\t|"
         dice_print = dice_print * string(dice[i]) * "\t|"
     end
     println(board_print * "\n" * expec_print * "\n" * dice_print)
@@ -62,5 +62,5 @@ function makeexperiments()
     end
 end
 
-makeexperiments()
+# makeexperiments()
 

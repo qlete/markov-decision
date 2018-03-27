@@ -1,9 +1,25 @@
 include("squaresub.jl")
 
-# Simulates a game of snake & ladder given a dice strategy and the trap list and returns the total cost
+# Simulates a game of snake & ladder starting at a box 1
+# input  :  - list : trap list
+#           - dice : dice strategy 
+#           - circular : true if game is circular
+#  
+# output :  - cost : total cost (number of dice throws)
 function simulate(list::Vector{Int64}, dice::Vector{Int64}, circular::Bool)
+    simulate_k(list, dice, circular, 1)
+end
+
+# Simulates a game of snake & ladder starting at a given box
+# input  :  - list : trap list
+#           - dice : dice strategy 
+#           - circular : true if game is circular
+#           - k : start box
+#
+# output :  - cost : total cost (number of dice throws)
+function simulate_k(list::Vector{Int64}, dice::Vector{Int64}, circular::Bool, k::Int64)
 	cost = 0
-	box = 1
+	box = k
 	while box != 15
 		box = oneturn(list, box, dice[box], circular)
 		# println(box)
@@ -11,6 +27,7 @@ function simulate(list::Vector{Int64}, dice::Vector{Int64}, circular::Bool)
 	end
 	return cost
 end
+
 
 # Implements one turn of the game given the start position and the dice
 function oneturn(list::Vector{Int64}, start::Int64, dice::Int64, circular::Bool)
