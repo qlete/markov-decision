@@ -28,53 +28,39 @@ function markovdecision(list::Vector{Int64}, circular::Bool)::Tuple{Vector{Float
     return((newV,dice))
 end
 
-function printmatrix(t_mat)
-    n = size(t_mat)[1]
-    for i = 1:n
-        println(t_mat[i,:])
+function printmarkovresults(list, expec, dice)
+    #println("- RESULT")
+    board_print = "Board \t|"
+    expec_print = "Cost \t|"
+    dice_print = "Dice \t|"
+    for i=1:15
+        board_print = board_print * string(list[i]) * "\t|"
+        expec_print = expec_print * string(round(expec[i],2)) * "\t|"
+        dice_print = dice_print * string(dice[i]) * "\t|"
     end
+    println(board_print * "\n" * expec_print * "\n" * dice_print)
 end
 
 function makeexperiments()
-    list = [0,0,0,0,0,2,0,0,1,1,2,2,0,0,0]
-    println(list, "\n")
+    board1 = [0,0,0,0,0,2,0,0,1,1,2,2,0,0,0]
+    board2 = [0,1,2,1,2,2,1,0,0,0,0,0,0,0,0]
+    board3 = ones(Int64, 15)
+
+    boards = [board1, board2, board3]
+    c = [false, true]
+
+    for board in boards
+        println("Board : ", board)
+        println("-- Noncircular --")
+        (expec, dice) = markovdecision(board, false)
+        printmarkovresults(board, expec, dice)
     
-    println(" --- Noncircular --- ")
-    (expec, dice) = markovdecision(list, false)
-    println("cost ", expec)
-    println("dice ", dice)
-    
-    println(" --- Circular --- ")
-    (expec, dice) = markovdecision(list, true)
-    println("cost ", expec)
-    println("dice ", dice)
-    
-    list = [0,1,2,1,2,2,1,0,0,0,0,0,0,0,0]
-    println("\n", list, "\n")
-    
-    println(" --- Noncircular --- ")
-    (expec, dice) = markovdecision(list, false)
-    println("cost ", expec)
-    println("dice ", dice)
-    
-    println(" --- Circular --- ")
-    (expec, dice) = markovdecision(list, true)
-    println("cost ", expec)
-    println("dice ", dice)
-    
-    list = ones(Int64, 15)
-    println("\n", list, "\n")
-    
-    println(" --- Noncircular --- ")
-    (expec, dice) = markovdecision(list, false)
-    println("cost ", expec)
-    println("dice ", dice)
-    
-    println(" --- Circular --- ")
-    (expec, dice) = markovdecision(list, true)
-    println("cost ", expec)
-    println("dice ", dice)
+        println("-- Circular --")
+        (expec, dice) = markovdecision(board, true)
+        printmarkovresults(board, expec, dice)
+        println()
+    end
 end
 
-# makeexperiments()
+makeexperiments()
 

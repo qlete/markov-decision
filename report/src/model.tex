@@ -1,4 +1,25 @@
 \section{Model and strategy} % (fold)
 \label{sec:model_and_strategy}
 
+\paragraph{Change of square values and traps definition} % (fold)
+\label{par:change_of_square_values_and_traps_definition}
+
+% paragraph change_of_square_values_and_traps_definition (end)
+
+\paragraph{No consecutive traps} % (fold)
+\label{par:no_consecutive_traps}
+A first assumption in the way we defined our board concerns the non-existence
+of domino effect of traps. This means that the only way to activate a trap
+is to fall on its box immediately after one dice throw.
+For example, if one lands on box 8, which is a type 3 [??? type 2 if we can not
+modify the project rules] trap, it brings us back to box 5. In this case,
+even if box 5 is a trap, it won't affect us until the following dice throw
+(i.e. if a 0 is made at the following dice throw).
+% paragraph no_consecutive_traps (end)
+
+\paragraph{Going back in the circular case always pass through the slow lane} % (fold)
+\label{par:going_back_in_the_circular_case_always_pass_through_the_slow_lane}
+
+% paragraph going_back_in_the_circular_case_always_pass_through_the_slow_lane (end)
+
 % section model_and_strategy (end)

@@ -8,3 +8,8 @@ Markov decision process for the snake and ladder game.
 - [ ] curves representing the precision when number of experiments are repeated and check it for by starting from all boxes (and not only the first one) : change `simulate` function (or add new one) so it takes the start box into account
 - [ ] have a cool kind of **graphical interface** to visual expected cost and what dice to play seeing the whole game
 
+### Particular scenarios or rules
+- [ ] prison block
+- [ ] block that allow to *play only certain dice(s) at the next throw*
+- [ ] no trap blocks, only trap blocks (mixed, particuliar trap, etc.)
+
