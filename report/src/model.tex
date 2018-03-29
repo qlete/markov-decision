@@ -29,7 +29,7 @@
 Let us first recall the general idea behind Markov decision processes.
 The objective is to determine the best set of actions $\{u(1), u(2), \dots
 u(n)\}$ that minimizes $V_{\pi}(s_0)$, the total expected cost of the process.
-The algorithm we use in order to determine this set is the following
+The algorithm we use in order to determine this set is the one based on Bellman equation
 \[
   V(k) \leftarrow \min_{a\in U(k)} \{c(a|k) 
   + \sum_{k'=1}^n p(k'|k,a)V(k') \} \qquad k \neq d
