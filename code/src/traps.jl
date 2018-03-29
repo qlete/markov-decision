@@ -1,20 +1,31 @@
 
 """
-    applytrap1(list)
+    applytrap1(square)
 
-Computes the transition probability matrix for the risky dice
-with squares types defined in `list` and circularity of
-board defined by `circular`.
+Returns the next square after trap 1, meaning going back to square 1,
+has been applied when being at `square`.
 """
 function applytrap1(square::Int64)
     return squaresub(square, 15)
 end
 
+"""
+    applytrap2(square)
 
+Returns the next square after trap 2, meaning going back 3 squares,
+has been applied when being at `square`.
+"""
 function applytrap2(square::Int64)
     return squaresub(square, 3)
 end
 
+"""
+    applytrap3(square)
+
+Returns the next square after trap 3 (the magic trap),
+meaning that one can go to every one of the 15 other squares
+with equal probability, has been applied when being at `square`.
+"""
 function applytrap3(square::Int64)
     return convert(Int64, ceil(rand()*15))
 end
