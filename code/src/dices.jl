@@ -1,4 +1,11 @@
-# Computes the transition probability matrix for the security dice
+export securitydice
+
+"""
+    securitydice(list)
+
+Computes the transition probability matrix for the security dice
+with squares types defined in `list`.
+"""
 function securitydice(list::Vector{Int64})::Array{Float64,2}
     proba = zeros(15, 15)
     for i = 1:14

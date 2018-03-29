@@ -83,23 +83,21 @@ function oneturn(list::Vector{Int64}, start::Int64, dice::Int64, circular::Bool)
 		return nextbox
 	elseif dice == 2
 		if rand([false, true])
-			if list[nextbox] == 0
-				return nextbox
-			elseif list[nextbox] == 1
-				return 1
-			elseif list[nextbox] == 2
-				return squaresub(nextbox, circular, 3)
-			end
+			nextsquare(list[nextbox])
 		else
 			return nextbox
 		end
 	elseif dice == 3
-		if list[nextbox] == 0
-			return nextbox
-		elseif list[nextbox] == 1
-			return 1
-		elseif list[nextbox] == 2
-			return squaresub(nextbox, circular, 3)
-		end
+		nextsquare(list[nextbox])
 	end
+end
+
+function nextsquare(square_type)
+    if square_type == 0
+    	return nextbox
+    elseif square_type == 1
+    	return trap1(nextbox)
+    elseif square_type == 2
+    	return trap2(nextbox)
+    end
 end

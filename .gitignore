@@ -30,3 +30,6 @@
 *.pyc
 report/report.pdf
 report/auxFiles/report.pdf
+
+html_doc/
+code/docs/build
