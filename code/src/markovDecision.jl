@@ -34,7 +34,7 @@ function printmarkovresults(list, expec, dice)
     expec_print = "Cost \t|"
     dice_print = "Dice \t|"
     for i=1:15
-        board_print = board_print * string(list[i]) * "\t|"
+        board_print = board_print * string(i) * " : " * string(list[i]) * "\t|"
         expec_print = expec_print * string(round(expec[i],3)) * "\t|"
         dice_print = dice_print * string(dice[i]) * "\t|"
     end
@@ -45,8 +45,9 @@ function makeexperiments()
     board1 = [0,0,0,0,0,2,0,0,1,1,2,2,0,0,0]
     board2 = [0,1,2,1,2,2,1,0,0,0,0,0,0,0,0]
     board3 = ones(Int64, 15)
+    board4 = [0,3,3,0,0,0,0,0,3,3,0,0,0,0,0]
 
-    boards = [board1, board2, board3]
+    boards = [board1, board2, board3, board4]
     c = [false, true]
 
     for board in boards

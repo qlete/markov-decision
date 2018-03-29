@@ -1,4 +1,4 @@
-export securitydice
+export securitydice, normaldice, riskydice
 
 """
     securitydice(list)
@@ -23,7 +23,13 @@ function securitydice(list::Vector{Int64})::Array{Float64,2}
     return proba
 end
 
-# Computes the transition probability matrix for the normal dice
+"""
+    normaldice(list, circular)
+
+Computes the transition probability matrix for the normal dice
+with squares types defined in `list` and circularity of
+board defined by `circular`.
+"""
 function normaldice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
     proba = zeros(15, 15)
     # Compute first the transition proba matrix as if there were no traps
@@ -68,15 +74,28 @@ function normaldice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
                     proba[i,j] = proba[i,j]/2
                 end
             elseif list[j] == 2 # Trap of type 2 : go back three squares
-                proba[i,squaresub(j,circular, 3)] = proba[i,squaresub(j,circular, 3)] + proba[i,j]/2
+                proba[i,squaresub(j, 3)] = proba[i,squaresub(j, 3)] + proba[i,j]/2
                 proba[i,j] = proba[i,j]/2
+            elseif list[j] == 3 # Trap of type 3 : uniform probability of going to any square
+                for k=1:15
+                    if k != j
+                        proba[i,k] = proba[i,k] + proba[i,j]/15/2
+                    end
+                end
+                proba[i,j] = proba[i,j]/2 + proba[i,j]/15/2
             end
         end
     end
     return proba
 end
 
-# Computes the transition probability matrix for the risky dice
+"""
+    riskydice(list, circular)
+
+Computes the transition probability matrix for the risky dice
+with squares types defined in `list` and circularity of
+board defined by `circular`.
+"""
 function riskydice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
     proba = zeros(15, 15)
     # Compute first the transition proba matrix as if there were no traps
@@ -144,6 +163,13 @@ function riskydice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
             elseif list[j] == 2 # Trap of type 2 : go back three squares
                 proba[i,squaresub(j,circular, 3)] = proba[i,squaresub(j,circular, 3)] + proba[i,j]
                 proba[i,j] = 0
+            elseif list[j] == 3 # Trap of type 3 : uniform probability of going to any square
+                for k=1:15
+                    if k != j
+                        proba[i,k] = proba[i,k] + proba[i,j]/15
+                    end
+                end
+                proba[i,j] = proba[i,j]/15
             end
         end
     end

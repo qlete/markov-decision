@@ -5,8 +5,9 @@ include("simulate.jl")
 board1 = [0,0,0,0,0,2,0,0,1,1,2,2,0,0,0]
 board2 = [0,1,2,1,2,2,1,0,0,0,0,0,0,0,0]
 board3 = ones(Int64, 15)
+board4 = [0,3,0,3,0,0,0,0,3,3,0,0,0,0,0]
 
-boards = [board1, board2, board3]
+boards = [board1, board2, board3, board4]
 c = [false, true]
 
 for board in boards
@@ -20,10 +21,10 @@ for board in boards
         (expec, dice) = markovdecision(board, circular)
         println("\tExpected cost = ", round(expec[1],3))
         allsim = Vector{Int64}()
-        for i=1:1000
+        for i=1:100000
         	push!(allsim, simulate(board, dice, circular))
         end
-        println("\tSimulated cost = ", mean(allsim))
+        println("\tSimulated cost = ", round(mean(allsim),3))
     end
 end
 
