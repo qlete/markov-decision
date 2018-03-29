@@ -1,25 +1,94 @@
 \section{Model and strategy} % (fold)
 \label{sec:model_and_strategy}
 
-\paragraph{Change of square values and traps definition} % (fold)
-\label{par:change_of_square_values_and_traps_definition}
+\subsection{Board description} % (fold)
+\label{sub:board_description}
 
-% paragraph change_of_square_values_and_traps_definition (end)
+% \todo{This subsection maybe does not need to stay here.}
+% 
+% \paragraph{Change of square values and traps definition} % (fold)
+% \label{par:change_of_square_values_and_traps_definition}
+% 
+% % paragraph change_of_square_values_and_traps_definition (end)
+% 
+% \paragraph{No consecutive traps} % (fold)
+% \label{par:no_consecutive_traps}
+% A first assumption in the way we defined our board concerns the non-existence
+% of domino effect of traps. This means that the only way to activate a trap
+% is to fall on its box immediately after one dice throw.
+% For example, if one lands on box 8, which is a type 3 [??? type 2 if we can not
+% modify the project rules] trap, it brings us back to box 5. In this case,
+% even if box 5 is a trap, it won't affect us until the following dice throw
+% (i.e. if a 0 is made at the following dice throw).
+% % paragraph no_consecutive_traps (end)
+% 
+% % subsection board_description (end)
 
-\paragraph{No consecutive traps} % (fold)
-\label{par:no_consecutive_traps}
-A first assumption in the way we defined our board concerns the non-existence
-of domino effect of traps. This means that the only way to activate a trap
-is to fall on its box immediately after one dice throw.
-For example, if one lands on box 8, which is a type 3 [??? type 2 if we can not
-modify the project rules] trap, it brings us back to box 5. In this case,
-even if box 5 is a trap, it won't affect us until the following dice throw
-(i.e. if a 0 is made at the following dice throw).
-% paragraph no_consecutive_traps (end)
+\subsection{Markov model} % (fold)
+\label{sub:markov_model}
+Let us first recall the general idea behind Markov decision processes.
+The objective is to determine the best set of actions $\{u(1), u(2), \dots
+u(n)\}$ that minimizes $V_{\pi}(s_0)$, the total expected cost of the process.
+The algorithm we use in order to determine this set is the following
+\[
+  V(k) \leftarrow \min_{a\in U(k)} \{c(a|k) 
+  + \sum_{k'=1}^n p(k'|k,a)V(k') \} \qquad k \neq d
+\]
+where $V(d)$ is set to 0 at each iteration, $d$ being the destination state.
+In this value-iteration algorithm, $c(a|k)$ and $p(k'|k,a)$
+respectively represent the \emph{cost} of making action $a$
+when being in state $k$ and the \emph{probability} of going
+from state $k$ to $k'$ when action $a$ is triggered.
 
-\paragraph{Going back in the circular case always pass through the slow lane} % (fold)
-\label{par:going_back_in_the_circular_case_always_pass_through_the_slow_lane}
+Linking this process to our \textit{Snake and Ladder} game,
+a state $k$ corresponds to \emph{being on} the kth square,
+thus taking values in the range 1 to 15.
+We then define the action $a$ as the \emph{throw of a dice}
+and since every one of the three dices can be thrown at each
+iteration we have $U(1) = \dots = U(15) = \{a_{\text{secu}},
+a_{\text{norm}}, a_{\text{risk}}\}$.
+Finally, recalling that the goal of the game is to get to
+the 15th square by \emph{minimizing the number of dice throws},
+the cost $c(a|k)$ equals 1 as each turn will lead in one dice
+throw, whatever the action $a$ or the state $k$. 
 
-% paragraph going_back_in_the_circular_case_always_pass_through_the_slow_lane (end)
+At this point only one last ingredient is missing to start implementing
+the above described algorithm : the transition probabilities $p(k'|k,a)$.
+Here lies the first main difficulty of the project as those depends
+both on the type of square or trap from which one leaves $k$ and
+on which one will arrive $k'$, as well as on the dice one
+decides to use (i.e. $a$).
+It is now important to \emph{find an efficient way of constructing
+the 3 probability matrices} $P_{\text{secu}}$, $P_{\text{norm}}$
+and $P_{\text{risk}}$ by minimizing the number of particular cases,
+as one can not even imagine to compute the $3\times 15^2$ individual probabilities.
+
+The precise implementation of the probability matrices won't be
+discussed in this section but it appeared important to us
+to still make a point on the mathematical correctness of our method.
+The idea of our method can be decomposed in two steps.
+\begin{enumerate}
+  \item First fill the matrix by assuming that
+  all squares are normal squares and thus filling the matrices
+  with probabilities $\frac{1}{2}$, $\frac{1}{3}$ and $\frac{1}{4}$,
+  making particular cases for the slow/fast \emph{lanes}
+  and the \emph{circularity} of the board.
+  \item Then re-modify each matrix line by taking traps into account
+  and thus re-distributing the traps transition probabilities.
+  For example, if there a \emph{type 2 trap} at square 8 
+  and the \emph{normal} dice is thrown, we make the following adjustments
+  for each line $i$.
+  \begin{align*}
+    p(i,5) &\leftarrow p(i,5) + p(i,8)/2 \\
+     p(i,8) &\leftarrow p(i,8)/2
+  \end{align*}
+\end{enumerate}
+
+% subsection markov_model (end)
+
+\subsection{Choosing the optimal dice} % (fold)
+\label{sub:choosing_the_optimal_dice}
+
+% subsection choosing_the_optimal_dice (end)
 
 % section model_and_strategy (end)

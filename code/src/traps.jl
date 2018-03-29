@@ -1,4 +1,4 @@
-
+export applytrap1, applytrap2, applytrap3
 """
     applytrap1(square)
 
