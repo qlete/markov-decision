@@ -1,4 +1,4 @@
-include("squaresub.jl")
+include("traps.jl")
 
 # Simulates a game of snake & ladder starting at a box 1
 # input  :  - list : trap list
@@ -96,10 +96,10 @@ function nextsquare(square_type, nextbox)
     if square_type == 0
     	return nextbox
     elseif square_type == 1
-    	return trap1(nextbox)
+    	return applytrap1(nextbox)
     elseif square_type == 2
-    	return trap2(nextbox)
+    	return applytrap2(nextbox)
     elseif square_type == 3
-    	return trap3(nextbox)
+    	return applytrap3(nextbox)
     end
 end

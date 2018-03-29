@@ -10,6 +10,7 @@ Markov decision process for the snake and ladder game.
 - [ ] sub-optimal strategies comparison (use of only some dices)
 - [x] performance function(s)
 - [ ] remove `circular` attribute from traps and adapt tests accordingly
+- [ ] see Results section and make plots for the 4 types of plots in appendix
 
 ### Particular scenarios or rules
 - [ ] prison block

@@ -1,4 +1,4 @@
-include("squaresub.jl")
+include("traps.jl")
 include("dices.jl")
 
 # Run the MDP value iteration algorithm
