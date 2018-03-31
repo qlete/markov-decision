@@ -1,4 +1,4 @@
-export applytrap1, applytrap2, applytrap3
+export applytrap1, applytrap2, applytrap3, squaresub
 """
     applytrap1(square)
 
@@ -30,6 +30,13 @@ function applytrap3(square::Int64)
     return convert(Int64, ceil(rand()*15))
 end
 
+"""
+    applytrap3(square)
+
+Returns the next square after trap 3 (the magic trap),
+meaning that one can go to every one of the 15 other squares
+with equal probability, has been applied when being at `square`.
+"""
 function squaresub(square::Int64, k::Int64)
     if k == 0
         return square
