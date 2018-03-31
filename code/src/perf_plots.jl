@@ -108,6 +108,9 @@ function plotcost_suboptimal(board)
     y_subopt1 = [simulatedcost(board, ones(Int64, 15), circular, start_box, x) for x in nb_iter]
     y_subopt2 = [simulatedcost(board, 2*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
     y_subopt3 = [simulatedcost(board, 3*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
+    dice_subopt4 = zeros(Int64, 15)
+    dice_subopt4[1:14] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[2:15]]
+    y_subopt4 = [simulatedcost(board, dice_subopt4, circular, start_box, x) for x in nb_iter]
     
     plot!(powers, y_sim, marker="o",
         label=["Optimal cost"],
