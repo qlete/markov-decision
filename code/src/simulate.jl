@@ -1,22 +1,29 @@
+export simulate, simulate_k, oneturn
+
 include("traps.jl")
 
-# Simulates a game of snake & ladder starting at a box 1
-# input  :  - list : trap list
-#           - dice : dice strategy 
-#           - circular : true if game is circular
-#  
-# output :  - cost : total cost (number of dice throws)
+"""
+    simulate(list, dice, circular)
+
+Returns the cost (number of dice throws) of a
+a complete simulation of a Snakes and Ladders game, meaning
+it starts at square 1, with a board disposition described
+in `list`, a dice strategy (dice to play at each square) in `dice`
+and the circularity of the board indicated in `circular`.
+"""
 function simulate(list::Vector{Int64}, dice::Vector{Int64}, circular::Bool)
     simulate_k(list, dice, circular, 1)
 end
 
-# Simulates a game of snake & ladder starting at a given box
-# input  :  - list : trap list
-#           - dice : dice strategy 
-#           - circular : true if game is circular
-#           - k : start box
-#
-# output :  - cost : total cost (number of dice throws)
+"""
+    simulate_k(list, dice, circular, k)
+
+Returns the cost (number of dice throws) of
+a simulation of a Snakes and Ladders game, starting at square `k`,
+with a board disposition described
+in `list`, a dice strategy (dice to play at each square) in `dice`
+and the circularity of the board indicated in `circular`.
+"""
 function simulate_k(list::Vector{Int64}, dice::Vector{Int64}, circular::Bool, k::Int64)
 	cost = 0
 	box = k
@@ -29,7 +36,15 @@ function simulate_k(list::Vector{Int64}, dice::Vector{Int64}, circular::Bool, k:
 end
 
 
-# Implements one turn of the game given the start position and the dice
+"""
+    oneturn(list, start, dice, circular)
+
+This function is used in the `simulate` function and played until
+the current square is not the square 15. Given the board disposition
+in `list` and its circularity in `circular`, the current square `start`
+and the `dice` to be played, it will return the next square (using
+random variables to simulate the dice and traps behaviors).
+"""
 function oneturn(list::Vector{Int64}, start::Int64, dice::Int64, circular::Bool)
 	startatthree = false
 	if (start >= 11) && (start <= 14)

@@ -1,4 +1,4 @@
-# Performance plots
+# Performance plots (`perf_plots.jl`)
 Allow to generate some plots to make sure our results are correct.
 
 ```@docs

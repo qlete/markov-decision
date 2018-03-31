@@ -8,15 +8,19 @@
 % \lstset{language=julia}
 
 \begin{document}
-% title (fold)
 
 \input{./titlepage}
 
+\pagenumbering{gobble} % do not write page nb.
 {\hypersetup{linkcolor=black}
-\setcounter{tocdepth}{2}
+%\setcounter{tocdepth}{3}
 \tableofcontents
 }
 \newpage
+\pagenumbering{arabic} % write page nb.
+
+\setcounter{page}{1} % reset page counter to 1
+
 
 \input{./src/intro}
 % \newpage
@@ -26,13 +30,15 @@
 % \newpage
 \input{./src/results}
 
-\newpage
-\appendix
-\input{./app/error_plots}
-
-\addcontentsline{toc}{part}{References}
+\addtocounter{section}{1}
+\addcontentsline{toc}{section}{\thesection~~~References}
 \nocite{*}
 \hypersetup{urlcolor=black}
 \printbibliography
+
+\newpage~\newpage
+\appendix
+\addcontentsline{toc}{part}{Appendix}
+\input{./app/error_plots}
 
 \end{document}

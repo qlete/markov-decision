@@ -1,7 +1,19 @@
+export markovdecision
+
 include("traps.jl")
 include("dices.jl")
 
-# Run the MDP value iteration algorithm
+"""
+    markovdecision(list, circular)
+
+Run the Markov Decision Process value-iteration algorithm.
+Given the vector `list` representing the 15 squares of the
+Snakes and Ladders game and the boolean `circular` to indicate
+whether the player has to lands exactly on the final square or not,
+it returns a tuple of two vectors.
+The first is a vector containing the expectation cost from each square
+and the second a vector containing the optimal dice to play at this square.
+"""
 function markovdecision(list::Vector{Int64}, circular::Bool)::Tuple{Vector{Float64},Vector{Int64}}
     # Get transition probability matrices
     A = securitydice(list)

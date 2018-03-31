@@ -1,2 +1,2 @@
-# Some additional experiments
+# Some additional experiments (`experiments.jl`)
 

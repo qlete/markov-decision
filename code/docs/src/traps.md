@@ -1,4 +1,4 @@
-# Defining the traps
+# Defining the traps (`traps.jl`)
 
 A first need is to make a function capable of returning the resulting
 square when we need to go back from *k* squares.

@@ -102,7 +102,7 @@ function plotcost_suboptimal(board)
     
     # cost plot
     start_box = 1
-    powers = [i for i=1:7]
+    powers = [i for i=1:3]
     nb_iter = [10^i for i in powers]
     y_sim = [simulatedcost(board, dice, circular, start_box, x) for x in nb_iter]
     y_subopt1 = [simulatedcost(board, ones(Int64, 15), circular, start_box, x) for x in nb_iter]
@@ -136,6 +136,6 @@ board_unif_low = [0,1,0,0,2,0,1,0,2,0,0,1,0,2,0]
 # p, figname = plotcost_persquare(board_unif_low)
 # savefig(p, figname)
 
-# 
-plot_subopt = plotcost_suboptimal(board_unif_low)
-savefig(plot_subopt, "../../img/cost_subopt_log.pdf")
+# # 
+# plot_subopt = plotcost_suboptimal(board_unif_low)
+# savefig(plot_subopt, "../../img/cost_subopt_log.pdf")
