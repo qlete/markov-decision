@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
 ### variables
-repo=~/markov-decision
-user=john
-#user=quentin
-path_to_package=/Users/$user/.julia/v0.6/SnakeLadder
-
+#user=john
+user=quentin
+if [ "$user" = "john" ]
+then
+	repo=~/markov-decision
+	path_to_package=/Users/john/.julia/v0.6/SnakeLadder
+else
+	repo=~/Documents/MA2Q2/Data_mining/markov-decision
+	path_to_package=/home/quentin/.julia/v0.6/SnakeLadder
+fi
 
 ### code part
 # src

@@ -86,13 +86,53 @@ function plotcost_persquare(board)
     return fig, figname
 end
 
+"""
+    plotcost_suboptimal(board)
+
+Plot the simulated cost for different suboptimal dice statgies
+of a game starting at square 1.
+"""
+function plotcost_suboptimal(board)
+    fig = plot()
+    # define board
+    circular = false
+    # expected cost
+    (expec, dice) = markovdecision(board, circular)
+    expected_cost_from_1 = expec[1]
+    
+    # cost plot
+    start_box = 1
+    powers = [i for i=1:7]
+    nb_iter = [10^i for i in powers]
+    y_sim = [simulatedcost(board, dice, circular, start_box, x) for x in nb_iter]
+    y_subopt1 = [simulatedcost(board, ones(Int64, 15), circular, start_box, x) for x in nb_iter]
+    y_subopt2 = [simulatedcost(board, 2*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
+    y_subopt3 = [simulatedcost(board, 3*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
+    
+    plot!(powers, y_sim, marker="o",
+        label=["Optimal cost"],
+        xlabel=("Log 10 number of simulations"),
+        ylabel=("Cost"))
+    plot!(powers, y_subopt1, marker="o",
+        label=["Cost for only security dice"])
+    plot!(powers, y_subopt2, marker="o",
+        label=["Cost for only normal dice"])
+    plot!(powers, y_subopt3, marker="o",
+        label=["Cost for only risky dice"])
+        
+    return fig
+end
+
 board_unif_low = [0,1,0,0,2,0,1,0,2,0,0,1,0,2,0]
+# # 
+# plot_cost, plot_errors = plotcost_pernbsim(board_unif_low)
+# savefig(plot_cost, "../../img/cost_iterations_log.pdf")
+# savefig(plot_errors, "../../img/error_iterations_log.pdf")
+
+# #
+# p, figname = plotcost_persquare(board_unif_low)
+# savefig(p, figname)
+
 # 
-plot_cost, plot_errors = plotcost_pernbsim(board_unif_low)
-savefig(plot_cost, "../../img/cost_iterations_log.pdf")
-savefig(plot_errors, "../../img/error_iterations_log.pdf")
-
-#
-p, figname = plotcost_persquare(board_unif_low)
-savefig(p, figname)
-
+plot_subopt = plotcost_suboptimal(board_unif_low)
+savefig(plot_subopt, "../../img/cost_subopt_log.pdf")
