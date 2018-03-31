@@ -4,7 +4,11 @@ makedocs(
     format = :html,
     sitename = "SnakeLadder.jl",
     pages = [
-    "Intro" => "index.md",
+    "Summary" => "index.md",
     "Dices" => "dices.md",
-    "Performance plots" => "perf_plots.md"]
+    "Traps" => "traps.md",
+    "Markov decision" => "markov.md",
+    "Simulate cost" => "simulate.md",
+    "Performance plots" => "perf_plots.md",
+    "Some experiments" => "experiments.md"]
 )
