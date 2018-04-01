@@ -22,7 +22,7 @@ of a game starting at square 1.
 function plotcost_pernbsim(board)
     fig1 = plot()
     # define board
-    circular = false
+    circular = true
     # expected cost
     (expec, dice) = markovdecision(board, circular)
     expected_cost_from_1 = expec[1]
@@ -62,7 +62,7 @@ when the game is repeated multiple times.
 function plotcost_persquare(board)
     fig = plot()
     # define board
-    circular = false
+    circular = true
     # expected cost
     (expec, dice) = markovdecision(board, circular)
     
@@ -77,12 +77,12 @@ function plotcost_persquare(board)
         
     scatter!(squares, expec,
         color=("red"),
-        #label=["Expected cost"],
+        label=["Expected cost"],
         xlabel=("Square number"),
         ylabel=("Cost")
         )
     
-    figname = "../../img/cost_per_square_" * string(nb_iter) * "_iter.pdf"
+    figname = "../../img/board_right_high/cost_per_square_" * string(nb_iter) * "_iter_circ.pdf"
     return fig, figname
 end
 
@@ -95,7 +95,7 @@ of a game starting at square 1.
 function plotcost_suboptimal(board)
     fig = plot()
     # define board
-    circular = false
+    circular = true
     # expected cost
     (expec, dice) = markovdecision(board, circular)
     expected_cost_from_1 = expec[1]
@@ -108,8 +108,9 @@ function plotcost_suboptimal(board)
     y_subopt1 = [simulatedcost(board, ones(Int64, 15), circular, start_box, x) for x in nb_iter]
     y_subopt2 = [simulatedcost(board, 2*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
     y_subopt3 = [simulatedcost(board, 3*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
-    dice_subopt4 = zeros(Int64, 15)
-    dice_subopt4[1:14] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[2:15]]
+    dice_subopt4 = ones(Int64, 15)
+    dice_subopt4[1:9] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[2:10]]
+    dice_subopt4[11:13] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[12:14]]
     y_subopt4 = [simulatedcost(board, dice_subopt4, circular, start_box, x) for x in nb_iter]
     
     plot!(powers, y_sim, marker="o",
@@ -122,20 +123,23 @@ function plotcost_suboptimal(board)
         label=["Cost for only normal dice"])
     plot!(powers, y_subopt3, marker="o",
         label=["Cost for only risky dice"])
+    plot!(powers, y_subopt4, marker="o",
+        label=["Cost for custom strategy"])
         
     return fig
 end
 
 board_unif_low = [0,1,0,0,2,0,1,0,2,0,0,1,0,2,0]
-# # 
-# plot_cost, plot_errors = plotcost_pernbsim(board_unif_low)
-# savefig(plot_cost, "../../img/cost_iterations_log.pdf")
-# savefig(plot_errors, "../../img/error_iterations_log.pdf")
+board_right_high = [0,0,0,0,0,2,0,0,1,1,2,2,0,0,0]
+# 
+plot_cost, plot_errors = plotcost_pernbsim(board_right_high)
+savefig(plot_cost, "../../img/board_right_high/cost_iterations_log_circ.pdf")
+savefig(plot_errors, "../../img/board_right_high/error_iterations_log_circ.pdf")
 
-# #
-# p, figname = plotcost_persquare(board_unif_low)
-# savefig(p, figname)
+#
+p, figname = plotcost_persquare(board_right_high)
+savefig(p, figname)
 
 # 
-plot_subopt = plotcost_suboptimal(board_unif_low)
-savefig(plot_subopt, "../../img/cost_subopt_log.pdf")
+plot_subopt = plotcost_suboptimal(board_right_high)
+savefig(plot_subopt, "../../img/board_right_high/cost_subopt_log_circ.pdf")

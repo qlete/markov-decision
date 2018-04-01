@@ -11,8 +11,28 @@ in the folder \lstinline|html_doc/| by opening \texttt{index.html}.
 The latter contains a structured presentation of the architecture
 of our code as well as a description of each function.
 
-\todo{Describe precise complicated parts? Still describe global
-architecture even if it is in HTML doc?}
+We will now describe the global architecture of our solution. 
+The reader interested in details about the implementation of
+specific functions is referred to the \textsc{html} documentation. 
 
+The first thing to do before being able to apply the algorithm
+is to define the probability matrices for each dice. 
+This is done in the file \texttt{dices.jl} that is decomposed into
+one function per dice. 
+
+Once this is done, we can apply the value-iteration algorithm itself. 
+The implementation of the algorithm can be found in the file \texttt{markovDecision.jl}
+which also contains the function mentionned in the project statement. 
+
+Then, we have to implement the simulation of the game given a dice strategy.
+To help in the simulation, we defined functions that simulate the effect
+of each trap in the file \texttt{traps.jl}. The simulation itself is
+implemented in the file \texttt{simulate.jl}. 
+
+The file \texttt{perf\_plots.jl} contain functions that make the plots
+of our report. 
+
+Finally, the file \texttt{SnakeLadder.jl} defines the \textsc{Julia} module
+necesssary to generate a proper package. 
 
 % section implementation (end)

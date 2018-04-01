@@ -1,8 +1,8 @@
 \section{Model and strategy} % (fold)
 \label{sec:model_and_strategy}
 
-\subsection{Board description} % (fold)
-\label{sub:board_description}
+%\subsection{Board description} % (fold)
+%\label{sub:board_description}
 
 % \todo{This subsection maybe does not need to stay here.}
 % 
@@ -39,6 +39,10 @@ In this value-iteration algorithm, $c(a|k)$ and $p(k'|k,a)$
 respectively represent the \emph{cost} of making action $a$
 when being in state $k$ and the \emph{probability} of going
 from state $k$ to $k'$ when action $a$ is triggered.
+
+It is proven that if we find a set of values $\{V(1), \dots, V(n)\}$
+that satisfies this set of equations, then it is optimal. 
+It can be solved by recursion.
 
 Linking this process to our \textit{Snake and Ladder} game,
 a state $k$ corresponds to \emph{being on} the kth square,
@@ -86,8 +90,16 @@ The idea of our method can be decomposed in two steps.
 
 % subsection markov_model (end)
 
-\subsection{Choosing the optimal dice} % (fold)
+\subsection{Finding the optimal dice} % (fold)
 \label{sub:choosing_the_optimal_dice}
+Once the algorithm converged and we obtained the optimal 
+values $\{V(1), \dots, V(n)\}$, the optimal dies that
+lead to these expected cost can be retreived by applying
+the following formula :
+\[
+  u(k) \leftarrow \text{argmin}_{a\in U(k)} \{c(a|k) 
+  + \sum_{k'=1}^n p(k'|k,a)V(k') \} \qquad k \neq d
+\]
 
 % subsection choosing_the_optimal_dice (end)
 

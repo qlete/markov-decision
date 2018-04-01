@@ -13,11 +13,12 @@
 \input{./titlepage}
 
 {\hypersetup{linkcolor=black}
-\setcounter{tocdepth}{2}
 \tableofcontents
+\thispagestyle{empty}
 }
 \newpage
 
+\setcounter{page}{1}
 \input{./src/intro}
 % \newpage
 \input{./src/model}
@@ -25,6 +26,8 @@
 \input{./src/implementation}
 % \newpage
 \input{./src/results}
+% \newpage
+\input{./src/conclusion}
 
 \newpage
 \appendix

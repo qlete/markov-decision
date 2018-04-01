@@ -31,11 +31,9 @@ function applytrap3(square::Int64)
 end
 
 """
-    applytrap3(square)
+    squaresub(square, k)
 
-Returns the next square after trap 3 (the magic trap),
-meaning that one can go to every one of the 15 other squares
-with equal probability, has been applied when being at `square`.
+Returns the next square after going back `k` squares when being at `square`. 
 """
 function squaresub(square::Int64, k::Int64)
     if k == 0
