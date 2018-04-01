@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 
 ### variables
-#user=john
-user=quentin
-if [ "$user" = "john" ]
+if [ $USER = "john" ]
 then
-	repo=~/markov-decision
-	path_to_package=/Users/john/.julia/v0.6/SnakeLadder
+ 	repo=~/markov-decision
+ 	path_to_package=/Users/john/.julia/v0.6/SnakeLadder
 else
-	repo=~/Documents/MA2Q2/Data_mining/markov-decision
-	path_to_package=/home/quentin/.julia/v0.6/SnakeLadder
+ 	repo=~/Documents/MA2Q2/Data_mining/markov-decision
+ 	path_to_package=/home/quentin/.julia/v0.6/SnakeLadder
 fi
 
 ### code part
@@ -22,7 +20,6 @@ cp -rf $repo/code/test/* $path_to_package/test/;
 # copy docs to real package doc
 cp -rf $repo/code/docs/* $path_to_package/docs/;
 # execute make.jl
-julia $path_to_package/docs/make.jl;
+sudo julia $path_to_package/docs/make.jl;
 # copy back doc to repo
 cp -rf $path_to_package/docs/build/* $repo/html_doc/
-
