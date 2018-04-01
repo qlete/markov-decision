@@ -3,7 +3,7 @@
 
 \subsection{Right high density trap-distributed board}
 
-The board used in this case is the following :
+The board used in this case is the following (figure~\ref{fig:board_right}).
 
 \begin{figure}[H]
 \centering
@@ -73,28 +73,30 @@ The board used in this case is the following :
 \label{fig:board_right}
 \end{figure}
 
-The graphs are as follows :
+The results graphs are as follows 
+(figures~\ref{fig:cost_iterations_log_right}, \ref{fig:cost_per_square_100_iter_right}
+and~\ref{fig:cost_subopt_log_right}).
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.41]{../img/board_right_high/cost_iterations_log_noncirc.pdf}
-\includegraphics[scale=0.41]{../img/board_right_high/cost_iterations_log_circ.pdf}
+\includegraphics[scale=0.53]{../img/board_right_high/cost_iterations_log_noncirc.pdf}
+\includegraphics[scale=0.53]{../img/board_right_high/cost_iterations_log_circ.pdf}
 \caption{Evolution of the simulated cost with the number of simulations. The horizontal line represent the expected cost computed with the value-iteration algorithm. On the left, results for the non-circular configuration. On the right, the circular one.}
 \label{fig:cost_iterations_log_right}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.41]{../img/board_right_high/cost_per_square_100_iter_noncirc.pdf}
-\includegraphics[scale=0.41]{../img/board_right_high/cost_per_square_100_iter_circ.pdf}
+\includegraphics[scale=0.53]{../img/board_right_high/cost_per_square_100_iter_noncirc.pdf}
+\includegraphics[scale=0.53]{../img/board_right_high/cost_per_square_100_iter_circ.pdf}
 \caption{Simulated and expected cost starting from each node for 100 simulations. On the left, results for the non-circular configuration. On the right, the circular one.}
 \label{fig:cost_per_square_100_iter_right}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.41]{../img/board_right_high/cost_subopt_log_noncirc.pdf}
-\includegraphics[scale=0.41]{../img/board_right_high/cost_subopt_log_circ.pdf}
+\includegraphics[scale=0.53]{../img/board_right_high/cost_subopt_log_noncirc.pdf}
+\includegraphics[scale=0.53]{../img/board_right_high/cost_subopt_log_circ.pdf}
 \caption{Simulated costs for the different strategies with the number of simulations. On the left, results for the non-circular configuration. On the right, the circular one.}
 \label{fig:cost_subopt_log_right}
 \end{figure}
@@ -102,7 +104,7 @@ The graphs are as follows :
 
 \subsection{Left high density trap-distributed board}
 
-The board used in this case is the following :
+The board used in this case is the following (figure~\ref{fig:board_left}).
 
 \begin{figure}[H]
 \centering
@@ -172,39 +174,43 @@ The board used in this case is the following :
 \label{fig:board_left}
 \end{figure}
 
-The graphs are as follows :
+The results graphs are as follows 
+(figures~\ref{fig:cost_iterations_log_left}, \ref{fig:cost_per_square_100_iter_left}
+and~\ref{fig:cost_subopt_log_left}).
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.41]{../img/board_left_high/cost_iterations_log_noncirc.pdf}
-\includegraphics[scale=0.41]{../img/board_left_high/cost_iterations_log_circ.pdf}
+\includegraphics[scale=0.53]{../img/board_left_high/cost_iterations_log_noncirc.pdf}
+\includegraphics[scale=0.53]{../img/board_left_high/cost_iterations_log_circ.pdf}
 \caption{Evolution of the simulated cost with the number of simulations. The horizontal line represent the expected cost computed with the value-iteration algorithm. On the left, results for the non-circular configuration. On the right, the circular one.}
 \label{fig:cost_iterations_log_left}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.41]{../img/board_left_high/cost_per_square_100_iter_noncirc.pdf}
-\includegraphics[scale=0.41]{../img/board_left_high/cost_per_square_100_iter_circ.pdf}
+\includegraphics[scale=0.53]{../img/board_left_high/cost_per_square_100_iter_noncirc.pdf}
+\includegraphics[scale=0.53]{../img/board_left_high/cost_per_square_100_iter_circ.pdf}
 \caption{Simulated and expected cost starting from each node for 100 simulations. On the left, results for the non-circular configuration. On the right, the circular one.}
 \label{fig:cost_per_square_100_iter_left}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.41]{../img/board_left_high/cost_subopt_log_noncirc.pdf}
-\includegraphics[scale=0.41]{../img/board_left_high/cost_subopt_log_circ.pdf}
+\includegraphics[scale=0.53]{../img/board_left_high/cost_subopt_log_noncirc.pdf}
+\includegraphics[scale=0.53]{../img/board_left_high/cost_subopt_log_circ.pdf}
 \caption{Simulated costs for the different strategies with the number of simulations. On the left, results for the non-circular configuration. On the right, the circular one.}
 \label{fig:cost_subopt_log_left}
 \end{figure}
 
 \subsection{Magic trap-distributed board}
 
-The board used in this case is the following :
+The board used in this case is the following (figure~\ref{fig:board_magic}).
+
+\vspace{1cm}
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=10]
+\begin{tikzpicture}[scale=11]
 %board = [0,3,0,3,0,0,0,0,3,3,0,0,0,0,0]
 \pgfmathsetmacro{\i}{1-1}
 \pgfmathsetmacro{\c}{"gray"}
@@ -268,28 +274,34 @@ The board used in this case is the following :
 \label{fig:board_magic}
 \end{figure}
 
-The graphs are as follows :
+\vspace{3cm}
+
+The results graphs are as follows 
+(figures~\ref{fig:cost_iterations_log_magic}, \ref{fig:cost_per_square_100_iter_magic}
+and~\ref{fig:cost_subopt_log_magic}).
+
+\vspace{1cm}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.41]{../img/board_magic/cost_iterations_log_noncirc.pdf}
-\includegraphics[scale=0.41]{../img/board_magic/cost_iterations_log_circ.pdf}
+\includegraphics[scale=0.53]{../img/board_magic/cost_iterations_log_noncirc.pdf}
+\includegraphics[scale=0.53]{../img/board_magic/cost_iterations_log_circ.pdf}
 \caption{Evolution of the simulated cost with the number of simulations. The horizontal line represent the expected cost computed with the value-iteration algorithm. On the left, results for the non-circular configuration. On the right, the circular one.}
 \label{fig:cost_iterations_log_magic}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.41]{../img/board_magic/cost_per_square_100_iter_noncirc.pdf}
-\includegraphics[scale=0.41]{../img/board_magic/cost_per_square_100_iter_circ.pdf}
+\includegraphics[scale=0.53]{../img/board_magic/cost_per_square_100_iter_noncirc.pdf}
+\includegraphics[scale=0.53]{../img/board_magic/cost_per_square_100_iter_circ.pdf}
 \caption{Simulated and expected cost starting from each node for 100 simulations. On the left, results for the non-circular configuration. On the right, the circular one.}
 \label{fig:cost_per_square_100_iter_magic}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.41]{../img/board_magic/cost_subopt_log_noncirc.pdf}
-\includegraphics[scale=0.41]{../img/board_magic/cost_subopt_log_circ.pdf}
+\includegraphics[scale=0.53]{../img/board_magic/cost_subopt_log_noncirc.pdf}
+\includegraphics[scale=0.53]{../img/board_magic/cost_subopt_log_circ.pdf}
 \caption{Simulated costs for the different strategies with the number of simulations. On the left, results for the non-circular configuration. On the right, the circular one.}
 \label{fig:cost_subopt_log_magic}
 \end{figure}
