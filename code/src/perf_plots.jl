@@ -1,4 +1,4 @@
-export plotcost_pernbsim, plotcost_persquare
+export plotcost_pernbsim, plotcost_persquare, plotcost_suboptimal
 
 using Plots
 
@@ -133,15 +133,15 @@ board_unif_low = [0,1,0,0,2,0,1,0,2,0,0,1,0,2,0]
 board_right_high = [0,0,0,0,0,2,0,0,1,1,2,2,0,0,0]
 board_left_high = [0,1,2,1,2,2,1,0,0,0,0,0,0,0,0]
 board_magic = [0,3,0,3,0,0,0,0,3,3,0,0,0,0,0]
-# 
-plot_cost, plot_errors = plotcost_pernbsim(board_magic)
-savefig(plot_cost, "../../img/board_magic/cost_iterations_log_circ.pdf")
-savefig(plot_errors, "../../img/board_magic/error_iterations_log_circ.pdf")
+# # 
+# plot_cost, plot_errors = plotcost_pernbsim(board_magic)
+# savefig(plot_cost, "../../img/board_magic/cost_iterations_log_circ.pdf")
+# savefig(plot_errors, "../../img/board_magic/error_iterations_log_circ.pdf")
 
-#
-p, figname = plotcost_persquare(board_magic)
-savefig(p, figname)
+# #
+# p, figname = plotcost_persquare(board_magic)
+# savefig(p, figname)
 
-# 
-plot_subopt = plotcost_suboptimal(board_magic)
-savefig(plot_subopt, "../../img/board_magic/cost_subopt_log_circ.pdf")
+# # 
+# plot_subopt = plotcost_suboptimal(board_magic)
+# savefig(plot_subopt, "../../img/board_magic/cost_subopt_log_circ.pdf")
