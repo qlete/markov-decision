@@ -80,16 +80,6 @@ function normaldice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
             end
         end
     end
-    # has_trap3 = list.==3
-    # for i = 1:14
-    #     for j = 1:15
-    #         if !has_trap3[j]
-    #             proba[i,j] = copy_proba[i,:]'*has_trap3/30 + copy_proba[i,j]
-    #         else
-    #             proba[i,j] = copy_proba[i,:]'*has_trap3/30 + copy_proba[i,j]/2
-    #         end
-    #     end
-    # end
     return proba
 end
 
@@ -171,15 +161,5 @@ function riskydice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
             end
         end
     end
-    # has_trap3 = list.==3
-    # for i = 1:14
-    #     for j = 1:15
-    #         if !has_trap3[j]
-    #             proba[i,j] = copy_proba[i,:]'*has_trap3/15 + copy_proba[i,j]
-    #         else
-    #             proba[i,j] = copy_proba[i,:]'*has_trap3/15
-    #         end
-    #     end
-    # end
     return proba
 end

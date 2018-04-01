@@ -108,10 +108,10 @@ function plotcost_suboptimal(board)
     y_subopt1 = [simulatedcost(board, ones(Int64, 15), circular, start_box, x) for x in nb_iter]
     y_subopt2 = [simulatedcost(board, 2*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
     y_subopt3 = [simulatedcost(board, 3*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
-    # dice_subopt4 = ones(Int64, 15)
-    # dice_subopt4[1:9] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[2:10]]
-    # dice_subopt4[11:13] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[12:14]]
-    # y_subopt4 = [simulatedcost(board, dice_subopt4, circular, start_box, x) for x in nb_iter]
+    dice_subopt4 = ones(Int64, 15)
+    dice_subopt4[1:9] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[2:10]]
+    dice_subopt4[11:13] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[12:14]]
+    y_subopt4 = [simulatedcost(board, dice_subopt4, circular, start_box, x) for x in nb_iter]
     
     plot!(powers, y_sim, marker="o",
         label=["Optimal cost"],
@@ -123,8 +123,8 @@ function plotcost_suboptimal(board)
         label=["Cost for only normal dice"])
     plot!(powers, y_subopt3, marker="o",
         label=["Cost for only risky dice"])
-    # plot!(powers, y_subopt4, marker="o",
-    #     label=["Cost for custom strategy"])
+    plot!(powers, y_subopt4, marker="o",
+        label=["Cost for custom strategy"])
         
     return fig
 end
