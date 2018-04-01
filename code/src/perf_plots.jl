@@ -82,7 +82,7 @@ function plotcost_persquare(board)
         ylabel=("Cost")
         )
     
-    figname = "../../img/board_right_high/cost_per_square_" * string(nb_iter) * "_iter_circ.pdf"
+    figname = "../../img/board_magic/cost_per_square_" * string(nb_iter) * "_iter_circ.pdf"
     return fig, figname
 end
 
@@ -108,10 +108,10 @@ function plotcost_suboptimal(board)
     y_subopt1 = [simulatedcost(board, ones(Int64, 15), circular, start_box, x) for x in nb_iter]
     y_subopt2 = [simulatedcost(board, 2*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
     y_subopt3 = [simulatedcost(board, 3*ones(Int64, 15), circular, start_box, x) for x in nb_iter]
-    dice_subopt4 = ones(Int64, 15)
-    dice_subopt4[1:9] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[2:10]]
-    dice_subopt4[11:13] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[12:14]]
-    y_subopt4 = [simulatedcost(board, dice_subopt4, circular, start_box, x) for x in nb_iter]
+    # dice_subopt4 = ones(Int64, 15)
+    # dice_subopt4[1:9] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[2:10]]
+    # dice_subopt4[11:13] = [t == 0 ? 3 : (t == 1 ? 1 : 2) for t in board[12:14]]
+    # y_subopt4 = [simulatedcost(board, dice_subopt4, circular, start_box, x) for x in nb_iter]
     
     plot!(powers, y_sim, marker="o",
         label=["Optimal cost"],
@@ -123,23 +123,25 @@ function plotcost_suboptimal(board)
         label=["Cost for only normal dice"])
     plot!(powers, y_subopt3, marker="o",
         label=["Cost for only risky dice"])
-    plot!(powers, y_subopt4, marker="o",
-        label=["Cost for custom strategy"])
+    # plot!(powers, y_subopt4, marker="o",
+    #     label=["Cost for custom strategy"])
         
     return fig
 end
 
 board_unif_low = [0,1,0,0,2,0,1,0,2,0,0,1,0,2,0]
 board_right_high = [0,0,0,0,0,2,0,0,1,1,2,2,0,0,0]
+board_left_high = [0,1,2,1,2,2,1,0,0,0,0,0,0,0,0]
+board_magic = [0,3,0,3,0,0,0,0,3,3,0,0,0,0,0]
 # 
-plot_cost, plot_errors = plotcost_pernbsim(board_right_high)
-savefig(plot_cost, "../../img/board_right_high/cost_iterations_log_circ.pdf")
-savefig(plot_errors, "../../img/board_right_high/error_iterations_log_circ.pdf")
+plot_cost, plot_errors = plotcost_pernbsim(board_magic)
+savefig(plot_cost, "../../img/board_magic/cost_iterations_log_circ.pdf")
+savefig(plot_errors, "../../img/board_magic/error_iterations_log_circ.pdf")
 
 #
-p, figname = plotcost_persquare(board_right_high)
+p, figname = plotcost_persquare(board_magic)
 savefig(p, figname)
 
 # 
-plot_subopt = plotcost_suboptimal(board_right_high)
-savefig(plot_subopt, "../../img/board_right_high/cost_subopt_log_circ.pdf")
+plot_subopt = plotcost_suboptimal(board_magic)
+savefig(plot_subopt, "../../img/board_magic/cost_subopt_log_circ.pdf")

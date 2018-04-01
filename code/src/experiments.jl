@@ -21,7 +21,7 @@ for board in boards
         (expec, dice) = markovdecision(board, circular)
         println("\tExpected cost = ", round(expec[1],3))
         allsim = Vector{Int64}()
-        for i=1:100000
+        for i=1:1e5
         	push!(allsim, simulate(board, dice, circular))
         end
         println("\tSimulated cost = ", round(mean(allsim),3))

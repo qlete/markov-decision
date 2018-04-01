@@ -65,8 +65,9 @@ function normaldice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
     end
     proba[15,15] = 1
 
+    copy_proba = copy(proba)
     # Remodify each line to take traps into account
-    for i = 1:15
+    for i = 1:14
         for j = 1:15
             if list[j] == 1 # Trap of type 1 : go back to square 1
                 if j != 1 
@@ -76,13 +77,16 @@ function normaldice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
             elseif list[j] == 2 # Trap of type 2 : go back three squares
                 proba[i,squaresub(j, 3)] = proba[i,squaresub(j, 3)] + proba[i,j]/2
                 proba[i,j] = proba[i,j]/2
-            elseif list[j] == 3 # Trap of type 3 : uniform probability of going to any square
-                for k=1:15
-                    if k != j
-                        proba[i,k] = proba[i,k] + proba[i,j]/15/2
-                    end
-                end
-                proba[i,j] = proba[i,j]/2 + proba[i,j]/15/2
+            end
+        end
+    end
+    has_trap3 = list.==3
+    for i = 1:14
+        for j = 1:15
+            if !has_trap3[j]
+                proba[i,j] = copy_proba[i,:]'*has_trap3/30 + copy_proba[i,j]
+            else
+                proba[i,j] = copy_proba[i,:]'*has_trap3/30 + copy_proba[i,j]/2
             end
         end
     end
@@ -152,8 +156,9 @@ function riskydice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
     end
     proba[15,15] = 1
 
+    copy_proba = copy(proba)
     # Remodify each line to take traps into account
-    for i = 1:15
+    for i = 1:14
         for j = 1:15
             if list[j] == 1 # Trap of type 1 : go back to square 1
                 if j != 1 
@@ -163,13 +168,16 @@ function riskydice(list::Vector{Int64}, circular::Bool)::Array{Float64,2}
             elseif list[j] == 2 # Trap of type 2 : go back three squares
                 proba[i, squaresub(j, 3)] = proba[i, squaresub(j, 3)] + proba[i,j]
                 proba[i,j] = 0
-            elseif list[j] == 3 # Trap of type 3 : uniform probability of going to any square
-                for k=1:15
-                    if k != j
-                        proba[i,k] = proba[i,k] + proba[i,j]/15
-                    end
-                end
-                proba[i,j] = proba[i,j]/15
+            end
+        end
+    end
+    has_trap3 = list.==3
+    for i = 1:14
+        for j = 1:15
+            if !has_trap3[j]
+                proba[i,j] = copy_proba[i,:]'*has_trap3/15 + copy_proba[i,j]
+            else
+                proba[i,j] = copy_proba[i,:]'*has_trap3/15
             end
         end
     end

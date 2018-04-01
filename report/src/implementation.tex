@@ -5,7 +5,7 @@ section, we will focus on the \emph{implementation}.
 As mentioned in the introduction, we decided to use the \textsc{Julia}
 programming language as our coding partner.
 Using \textsc{Julia} intuitive package generator, we were able to
-produce beautiful documentation and we therefore strongly advise
+produce beautiful documentation and we therefore invite
 the reader to have a look at the \textsc{html} documentation located
 in the folder \lstinline|html_doc/| by opening the \texttt{index.html} file.
 The latter contains a structured presentation of the architecture
@@ -15,7 +15,6 @@ We will now describe the global architecture of our solution.
 The reader interested in details about the implementation of
 specific functions is referred to the \textsc{html} documentation. 
 
-<<<<<<< HEAD
 The first thing to do before being able to apply the algorithm
 is to define the probability matrices for each dice. 
 This is done in the file \texttt{dices.jl} that is decomposed into
@@ -35,5 +34,10 @@ of our report.
 
 Finally, the file \texttt{SnakeLadder.jl} defines the \textsc{Julia} module
 necesssary to generate a proper package. 
+
+There is also an additional file called \texttt{experiments.jl}
+which launches some simulations of the game and print the results.
+The user interested in testing our implementation and get quick results
+is invited to execute this file.
 
 % section implementation (end)

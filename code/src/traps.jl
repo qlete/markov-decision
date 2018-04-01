@@ -27,7 +27,7 @@ meaning that one can go to every one of the 15 other squares
 with equal probability, has been applied when being at `square`.
 """
 function applytrap3(square::Int64)
-    return convert(Int64, ceil(rand()*15))
+    return rand(1:15)
 end
 
 """

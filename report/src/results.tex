@@ -1,6 +1,14 @@
 \section{Results} % (fold)
 \label{sec:results}
 
+\subsection{New traps} % (fold)
+\label{sub:new_traps}
+First of all, we defined a new kind of trap that we called the Magic trap. 
+It is defined as follows : if a player falls on a magic trap, it will
+be ejected to any other square on the board with a uniform probability. 
+
+% subsection New traps (end)
+
 \subsection{Choosing the board} % (fold)
 \label{sub:choosing_the_board}
 In order to analyse the behavior of the game in various situations,
@@ -10,16 +18,13 @@ distributions of traps on the board. They are defined as
   \item A \emph{uniformly low} density trap-distributed board,
   \item a \emph{left high} density trap-distributed board,
   \item a \emph{right high} density trap-distributed board,
-  \item and a \emph{uniformly high} density trap-distributed board.
+  \item and a \emph{magic} trap-distributed board, with only magic traps.
 \end{enumerate}
 The results presented in this section will correspond to the first case,
 as it is likely to represent most of real life \emph{Snake and Ladder} games.
 However, appendix~\ref{app:additional_error_plots} will contain the results
 of the three other board distributions and some comment on them will be
 made at the end of this section.
-
-\todo{Generate the figure/results for those cases (in appendix?) with boards defined
-in experiments.jl OR remove this section.}
 
 Figure~\ref{fig:board_unif_low} represents the board we used to conduct the experiments.
 
