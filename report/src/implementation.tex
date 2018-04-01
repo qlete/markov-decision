@@ -1,8 +1,8 @@
 \section{Implementation} % (fold)
 \label{sec:implementation}
-Now that the model and strategy has been described in the previous
+Now that the model and strategy have been described in the previous
 section, we will focus on the \emph{implementation}.
-As mentioned in the introduction, we decided to use the \textsc{Julia}
+We decided to use the \textsc{Julia}
 programming language as our coding partner.
 Using \textsc{Julia} intuitive package generator, we were able to
 produce beautiful documentation and we therefore invite
@@ -11,33 +11,33 @@ in the folder \lstinline|html_doc/| by opening the \texttt{index.html} file.
 The latter contains a structured presentation of the architecture
 of our code as well as a description of each function.
 
-We will now describe the global architecture of our solution. 
-The reader interested in details about the implementation of
+We will still here describe the global architecture of our solution,
+recalling that the reader interested in details about the implementation of
 specific functions is referred to the \textsc{html} documentation. 
 
-The first thing to do before being able to apply the algorithm
-is to define the probability matrices for each dice. 
-This is done in the file \texttt{dices.jl} that is decomposed into
-one function per dice. 
-
-Once this is done, we can apply the value-iteration algorithm itself. 
-The implementation of the algorithm can be found in the file \texttt{markovDecision.jl}
-which also contains the function mentionned in the project statement. 
-
-Then, we have to implement the simulation of the game given a dice strategy.
-To help in the simulation, we defined functions that simulate the effect
-of each trap in the file \texttt{traps.jl}. The simulation itself is
-implemented in the file \texttt{simulate.jl}. 
-
-The file \texttt{perf\_plots.jl} contain functions that make the plots
-of our report. 
-
-Finally, the file \texttt{SnakeLadder.jl} defines the \textsc{Julia} module
-necesssary to generate a proper package. 
-
-There is also an additional file called \texttt{experiments.jl}
-which launches some simulations of the game and prints the results.
-The user interested in testing our implementation and get quick results
-is invited to execute this file.
+\begin{itemize}
+  \item The first thing to do before being able to apply the algorithm
+  is to define the \emph{probability matrices} for each dice. 
+  This is done in~\texttt{dices.jl} that is decomposed into one function per dice. 
+  
+  \item We then apply the \emph{value-iteration algorithm} itself and its
+  implementation can be found in the file~\texttt{markovDecision.jl}
+  which also contains the required function of the project statement. 
+  
+  \item Then, we have to implement the \emph{simulation} of the game given a dice strategy.
+  To help in the simulation, we defined functions that simulate the effect
+  of each trap in the file \texttt{traps.jl}. The simulation itself is
+  implemented in the file \texttt{simulate.jl}. 
+  
+  \item Next, the file~\texttt{perf\_plots.jl} contains functions
+  that make the plots used in our report. 
+  
+  \item An additional file, \texttt{experiments.jl}, launches some simulations
+  on various boards and prints the results in a clear fashion.
+  Executing this file will allow to quickly verify our implementation.
+  
+  \item Finally, \texttt{SnakeLadder.jl} defines the \textsc{Julia} module
+  necessary to generate a proper package. 
+\end{itemize}
 
 % section implementation (end)

@@ -34,16 +34,16 @@ The algorithm we use in order to determine this set is the one based on Bellman 
   + \sum_{k'=1}^n p(k'|k,a)V(k') \} \qquad k \neq d
 \]
 where $V(d)$ is set to 0 at each iteration, $d$ being the destination state.
-In this value-iteration algorithm, $c(a|k)$ and $p(k'|k,a)$
+In this \emph{value-iteration} algorithm, $c(a|k)$ and $p(k'|k,a)$
 respectively represent the \emph{cost} of making action $a$
 when being in state $k$ and the \emph{probability} of going
 from state $k$ to $k'$ when action $a$ is triggered.
 
 It is proven that if we find a set of values $\{V(1), \dots, V(n)\}$
-that satisfies this set of equations, then it is optimal. 
-It can be solved by recursion.
+that satisfies this set of equations, then it is \emph{optimal}
+and it can be solved by \emph{recursion}.
 
-Linking this process to our \textit{Snake and Ladder} game,
+Linking this process to our \textit{Snakes and Ladders} game,
 a state $k$ corresponds to \emph{being on} the kth square,
 thus taking values in the range 1 to 15.
 We then define the action $a$ as the \emph{throw of a dice}
@@ -56,27 +56,26 @@ the cost $c(a|k)$ equals 1 as each turn will lead in one dice
 throw, whatever the action $a$ or the state $k$. 
 
 At this point only one last ingredient is missing to start implementing
-the above described algorithm : the transition probabilities $p(k'|k,a)$.
+the above described algorithm~: the transition probabilities $p(k'|k,a)$.
 Here lies the first main difficulty of the project as those depends
 both on the type of square or trap from which one leaves $k$ and
 on which one will arrive $k'$, as well as on the dice one
 decides to use (i.e. $a$).
 It is now important to \emph{find an efficient way of constructing
-the 3 probability matrices} $P_{\text{secu}}$, $P_{\text{norm}}$
+the 3 transition probability matrices} $P_{\text{secu}}$, $P_{\text{norm}}$
 and $P_{\text{risk}}$ by minimizing the number of particular cases,
 as one can not even imagine to compute the $3\times 15^2$ individual probabilities.
 
 The precise implementation of the probability matrices won't be
 discussed in this section but it appeared important to us
-to still make a point on the mathematical correctness of our method.
-The idea of our method can be decomposed in two steps.
+to still make a point on the mathematical idea of our method.
 \begin{enumerate}
-  \item First fill the matrix by assuming that
+  \item First we fill the matrix by assuming that
   all squares are normal squares and thus filling the matrices
   with probabilities $\frac{1}{2}$, $\frac{1}{3}$ and $\frac{1}{4}$,
   making particular cases for the slow/fast \emph{lanes}
   and the \emph{circularity} of the board.
-  \item Then re-modify each matrix line by taking traps into account
+  \item Then we re-modify each matrix line by taking \emph{traps} into account
   and thus re-distributing the traps transition probabilities.
   For example, if there a \emph{type 2 trap} at square 8 
   and the \emph{normal} dice is thrown, we make the following adjustments
@@ -92,16 +91,15 @@ The idea of our method can be decomposed in two steps.
 \subsection{Finding the optimal dice} % (fold)
 \label{sub:choosing_the_optimal_dice}
 Once the algorithm converged and we obtained the optimal 
-values $\{V(1), \dots, V(n)\}$, the optimal dies that
-lead to these expected cost can be retreived by applying
-the following formula :
+cost values $\{V(1), \dots, V(n)\}$, the optimal dices that
+lead to these expected cost can be retrieved by applying
+the following formula
 \[
-  u(k) \leftarrow \text{argmin}_{a\in U(k)} \{c(a|k) 
+  u(k) \leftarrow \arg\min_{a\in U(k)} \{c(a|k) 
   + \sum_{k'=1}^n p(k'|k,a)V(k') \} \qquad k \neq d
 \]
-
-This formula will at each iteration return the actions
-(here the dies) that enables to reach the minimum
+This formula returns at each iteration the action
+(i.e. the \emph{type of dice}) that enables to reach the minimum
 expected cost contained in the values $\{V(1), \dots, V(n)\}$.
 
 % subsection choosing_the_optimal_dice (end)
